@@ -1,0 +1,2632 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Tia Games</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --bg: #06111e;
+    --bg2: #091827;
+    --card: #0c1d2e;
+    --border: #1d3c59;
+    --blue: #1fce6a;
+    --blue2: #14a854;
+    --text: #ffffff;
+    --muted: #8da0b5;
+    --green: #d8f527;
+    --red: #ff394d;
+}
+
+body {
+    font-family: Arial, "Segoe UI", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+}
+
+button,
+input,
+select {
+    font-family: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+/* ================= NAVBAR ================= */
+
+.navbar {
+    height: 70px;
+    background: #071522;
+    border-bottom: 1px solid #1b334b;
+
+    display: flex;
+    align-items: center;
+    gap: 32px;
+
+    padding: 0 4%;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+
+    font-size: 28px;
+    font-weight: 800;
+
+    white-space: nowrap;
+    cursor: pointer;
+}
+
+.logo-icon {
+    width: 38px;
+    height: 38px;
+    flex-shrink: 0;
+    filter: drop-shadow(0 3px 10px rgba(31,206,106,.35));
+}
+
+.logo span {
+    color: var(--blue);
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 27px;
+}
+
+.nav-links button {
+    background: transparent;
+    border: none;
+
+    color: #aab9c9;
+    font-size: 15px;
+
+    transition: .2s;
+}
+
+.nav-links button:hover,
+.nav-links button.active {
+    color: var(--blue);
+}
+
+.nav-right {
+    margin-right: auto;
+
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.search-box {
+    position: relative;
+}
+
+.search {
+    width: 240px;
+    height: 40px;
+
+    background: #101f31;
+    border: 1px solid #29445f;
+    border-radius: 6px;
+
+    color: white;
+    outline: none;
+
+    padding: 0 40px 0 14px;
+}
+
+.search:focus {
+    border-color: var(--blue);
+}
+
+.search-icon {
+    position: absolute;
+    right: 12px;
+    top: 11px;
+    color: #7f95aa;
+}
+
+.language {
+    height: 40px;
+
+    background: #101f31;
+    border: 1px solid #29445f;
+    border-radius: 6px;
+
+    color: white;
+    padding: 0 10px;
+
+    outline: none;
+}
+
+.login-btn,
+.signup-btn {
+    height: 40px;
+    padding: 0 15px;
+
+    border-radius: 6px;
+    font-weight: bold;
+
+    border: 1px solid var(--blue);
+}
+
+.login-btn {
+    background: transparent;
+    color: white;
+}
+
+.signup-btn {
+    background: var(--blue);
+    color: white;
+}
+
+.login-btn:hover {
+    background: #12334f;
+}
+
+.signup-btn:hover {
+    background: var(--blue2);
+}
+
+/* ================= ACCOUNT ================= */
+
+.account-area {
+    display: none;
+    align-items: center;
+    gap: 8px;
+}
+
+.account-area.show {
+    display: flex;
+}
+
+.account-name {
+    color: #fff;
+    max-width: 130px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-weight: 700;
+    font-size: 14px;
+}
+
+.logout-btn {
+    height: 40px;
+    padding: 0 12px;
+    border-radius: 6px;
+    border: 1px solid #5a7188;
+    background: #101f31;
+    color: #fff;
+}
+
+.logout-btn:hover {
+    border-color: var(--blue);
+    background: #12334f;
+}
+
+/* ================= CONTAINER ================= */
+
+.container {
+    width: 94%;
+    max-width: 1450px;
+    margin: 22px auto 60px;
+}
+
+/* ================= HERO ================= */
+
+.hero {
+    min-height: 410px;
+
+    border: 1px solid #21415e;
+    border-radius: 10px;
+
+    overflow: hidden;
+    position: relative;
+
+    background-image:
+        linear-gradient(
+            90deg,
+            rgba(0,0,0,.95) 0%,
+            rgba(0,0,0,.78) 28%,
+            rgba(0,0,0,.25) 70%,
+            rgba(0,0,0,.1) 100%
+        ),
+        url("https://cdn.cloudflare.steamstatic.com/steam/apps/1174180/library_hero.jpg");
+
+    background-size: cover;
+    background-position: center;
+}
+
+.hero-content {
+    width: 550px;
+    max-width: 80%;
+
+    padding: 65px 55px;
+
+    position: relative;
+    z-index: 2;
+}
+
+.hero-small {
+    color: var(--blue);
+    font-size: 15px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    margin-bottom: 12px;
+}
+
+.hero h1 {
+    font-size: 50px;
+    line-height: 1.08;
+    margin-bottom: 15px;
+}
+
+.hero p {
+    color: #d0d8e0;
+    line-height: 1.8;
+    font-size: 17px;
+    margin-bottom: 24px;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.primary-btn {
+    background: var(--blue);
+    border: none;
+    color: white;
+
+    padding: 13px 23px;
+    border-radius: 6px;
+
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.primary-btn:hover {
+    background: var(--blue2);
+}
+
+.hero-price {
+    color: var(--green);
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.slider-dots {
+    position: absolute;
+    bottom: 18px;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    display: flex;
+    gap: 8px;
+}
+
+.dot {
+    width: 9px;
+    height: 9px;
+
+    border-radius: 50%;
+    background: #60768d;
+}
+
+.dot.active {
+    width: 27px;
+    border-radius: 10px;
+    background: var(--blue);
+}
+
+/* ================= SECTION ================= */
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin: 30px 0 17px;
+}
+
+.section-header h2 {
+    font-size: 24px;
+}
+
+.section-header a {
+    color: var(--blue);
+    cursor: pointer;
+    font-size: 14px;
+}
+
+/* ================= STORE LAYOUT ================= */
+
+.store-layout {
+    display: grid;
+    grid-template-columns: 1fr 280px;
+    gap: 18px;
+}
+
+/* ================= GAMES ================= */
+
+.games {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+}
+
+.game-card {
+    background: var(--card);
+
+    border: 1px solid var(--border);
+    border-radius: 7px;
+
+    overflow: hidden;
+
+    transition: .25s;
+
+    cursor: pointer;
+}
+
+.game-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--blue);
+    box-shadow: 0 12px 35px rgba(0,0,0,.35);
+}
+
+.game-image {
+    height: 175px;
+    overflow: hidden;
+    background: #0a1725;
+}
+
+.game-image img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    display: block;
+
+    transition: transform .35s;
+}
+
+.game-card:hover .game-image img {
+    transform: scale(1.06);
+}
+
+.game-info {
+    padding: 14px;
+}
+
+.game-info h3 {
+    font-size: 17px;
+    margin-bottom: 7px;
+}
+
+.game-info p {
+    color: var(--muted);
+    font-size: 13px;
+    margin-bottom: 14px;
+}
+
+.game-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.price {
+    color: var(--green);
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.cart-btn {
+    width: 37px;
+    height: 34px;
+
+    background: #153957;
+    border: none;
+    border-radius: 5px;
+
+    color: white;
+    font-size: 17px;
+}
+
+.cart-btn:hover {
+    background: var(--blue);
+}
+
+/* ================= SIDEBAR ================= */
+
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.side-box {
+    background: #0a1a2b;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+
+    padding: 20px;
+}
+
+.side-box h3 {
+    font-size: 18px;
+    margin-bottom: 15px;
+}
+
+.categories {
+    list-style: none;
+}
+
+.categories li {
+    padding: 9px 0;
+
+    color: #aab8c8;
+
+    cursor: pointer;
+
+    transition: .2s;
+}
+
+.categories li:hover {
+    color: var(--blue);
+    transform: translateX(-3px);
+}
+
+/* ================= OFFER ================= */
+
+.offer {
+    background: #0b1c2c;
+    border: 1px solid var(--border);
+
+    border-radius: 8px;
+
+    overflow: hidden;
+}
+
+.offer img {
+    width: 100%;
+    height: 130px;
+    object-fit: cover;
+    display: block;
+}
+
+.offer-content {
+    padding: 14px;
+}
+
+.discount {
+    display: inline-block;
+
+    background: var(--red);
+    color: white;
+
+    padding: 5px 8px;
+
+    border-radius: 4px;
+
+    font-weight: bold;
+    font-size: 13px;
+
+    margin-bottom: 9px;
+}
+
+.old-price {
+    color: #69798a;
+    text-decoration: line-through;
+    margin-right: 7px;
+}
+
+.offer-price {
+    color: var(--green);
+    font-weight: bold;
+}
+
+/* ================= SECOND ROW ================= */
+
+.big-games {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+}
+
+/* ================= FEATURES ================= */
+
+.features {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+
+    margin-top: 30px;
+}
+
+.feature {
+    background: #091a2a;
+    border: 1px solid #1c354d;
+
+    border-radius: 8px;
+
+    padding: 20px;
+}
+
+.feature-icon {
+    font-size: 29px;
+    margin-bottom: 10px;
+}
+
+.feature h3 {
+    margin-bottom: 7px;
+}
+
+.feature p {
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+/* ================= FOOTER ================= */
+
+footer {
+    border-top: 1px solid #192f45;
+
+    padding: 35px 5%;
+
+    color: #718397;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.footer-logo {
+    color: white;
+    font-size: 23px;
+    font-weight: bold;
+}
+
+.footer-logo span {
+    color: var(--blue);
+}
+
+/* ================= MODAL ================= */
+
+.modal {
+    position: fixed;
+    inset: 0;
+
+    background: rgba(0,0,0,.75);
+
+    display: none;
+    align-items: center;
+    justify-content: center;
+
+    z-index: 2000;
+
+    padding: 20px;
+}
+
+.modal.show {
+    display: flex;
+}
+
+.modal-box {
+    width: 430px;
+    max-width: 100%;
+
+    background: #0b1b2c;
+
+    border: 1px solid #294862;
+    border-radius: 10px;
+
+    padding: 28px;
+
+    position: relative;
+
+    box-shadow: 0 25px 70px rgba(0,0,0,.6);
+}
+
+.close {
+    position: absolute;
+    left: 15px;
+    top: 12px;
+
+    border: none;
+    background: transparent;
+
+    color: #8ca0b4;
+    font-size: 25px;
+}
+
+.modal-box h2 {
+    margin-bottom: 7px;
+}
+
+.modal-subtitle {
+    color: var(--muted);
+    margin-bottom: 22px;
+}
+
+.input {
+    width: 100%;
+    height: 44px;
+
+    margin-bottom: 12px;
+
+    background: #071522;
+
+    border: 1px solid #29445d;
+    border-radius: 6px;
+
+    color: white;
+
+    padding: 0 12px;
+
+    outline: none;
+}
+
+.input:focus {
+    border-color: var(--blue);
+}
+
+.full-btn {
+    width: 100%;
+    height: 44px;
+
+    border: none;
+    border-radius: 6px;
+
+    background: var(--blue);
+    color: white;
+
+    font-weight: bold;
+
+    margin-top: 5px;
+}
+
+.facebook {
+    width: 100%;
+    height: 44px;
+
+    margin-top: 10px;
+
+    background: #1877f2;
+    color: white;
+
+    border: none;
+    border-radius: 6px;
+
+    font-weight: bold;
+}
+
+.modal-switch {
+    text-align: center;
+    margin-top: 18px;
+
+    color: var(--muted);
+    font-size: 14px;
+}
+
+.modal-switch span {
+    color: var(--blue);
+    cursor: pointer;
+}
+
+/* ================= TOAST ================= */
+
+.toast {
+    position: fixed;
+
+    bottom: 25px;
+    left: 25px;
+
+    background: #10283e;
+
+    border: 1px solid #2d5b7d;
+
+    color: white;
+
+    padding: 13px 18px;
+
+    border-radius: 7px;
+
+    transform: translateY(100px);
+    opacity: 0;
+
+    transition: .3s;
+
+    z-index: 3000;
+}
+
+.toast.show {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+/* ================= CART PANEL ================= */
+
+.cart-panel {
+    position: fixed;
+
+    top: 70px;
+    left: -380px;
+
+    width: 360px;
+    max-width: 90vw;
+    height: calc(100vh - 70px);
+
+    background: #091a2a;
+
+    border-right: 1px solid #29445d;
+
+    z-index: 1500;
+
+    padding: 22px;
+
+    transition: .3s;
+
+    overflow-y: auto;
+}
+
+.cart-panel.open {
+    left: 0;
+}
+
+.cart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-bottom: 20px;
+}
+
+.cart-close {
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 22px;
+}
+
+.cart-item {
+    background: #0e2336;
+    border: 1px solid #203d57;
+
+    border-radius: 7px;
+
+    padding: 12px;
+
+    margin-bottom: 10px;
+}
+
+.cart-item-title {
+    font-weight: bold;
+    margin-bottom: 6px;
+}
+
+.cart-item-price {
+    color: var(--green);
+}
+
+.cart-total {
+    border-top: 1px solid #29445d;
+    margin-top: 20px;
+    padding-top: 18px;
+
+    display: flex;
+    justify-content: space-between;
+
+    font-weight: bold;
+}
+
+.cart-floating {
+    position: fixed;
+
+    left: 20px;
+    bottom: 20px;
+
+    width: 52px;
+    height: 52px;
+
+    border-radius: 50%;
+
+    border: none;
+
+    background: var(--blue);
+    color: white;
+
+    font-size: 21px;
+
+    z-index: 1200;
+
+    box-shadow: 0 8px 25px rgba(0,0,0,.4);
+}
+
+/* ================= LIBRARY ================= */
+
+.library-page {
+    display: none;
+}
+
+.library-page.show {
+    display: block;
+}
+
+.store-page.hidden {
+    display: none;
+}
+
+.library-empty {
+    text-align: center;
+    padding: 80px 20px;
+
+    background: #091a2a;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+}
+
+.library-empty div {
+    font-size: 55px;
+    margin-bottom: 15px;
+}
+
+.library-empty p {
+    color: var(--muted);
+    margin-top: 10px;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width: 1150px) {
+
+    .games,
+    .big-games {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .features {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .navbar {
+        gap: 15px;
+    }
+
+    .search {
+        width: 190px;
+    }
+}
+
+@media (max-width: 850px) {
+
+    .navbar {
+        height: auto;
+        padding: 13px 4%;
+        flex-wrap: wrap;
+    }
+
+    .nav-links {
+        order: 3;
+        width: 100%;
+        justify-content: center;
+    }
+
+    .nav-right {
+        margin-right: 0;
+    }
+
+    .store-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .sidebar {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .hero {
+        min-height: 380px;
+    }
+
+    .hero-content {
+        padding: 50px 30px;
+    }
+
+    .hero h1 {
+        font-size: 40px;
+    }
+}
+
+@media (max-width: 600px) {
+
+    .logo {
+        font-size: 23px;
+    }
+
+    .nav-right {
+        width: 100%;
+        flex-wrap: wrap;
+    }
+
+    .search-box {
+        flex: 1;
+    }
+
+    .search {
+        width: 100%;
+    }
+
+    .hero {
+        min-height: 450px;
+        background-position: 62% center;
+    }
+
+    .hero-content {
+        max-width: 95%;
+        padding: 45px 25px;
+    }
+
+    .hero h1 {
+        font-size: 34px;
+    }
+
+    .games,
+    .big-games,
+    .features,
+    .sidebar {
+        grid-template-columns: 1fr;
+    }
+
+    .footer-content {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+}
+
+/* ================= STARTUP LOADING SCREEN ================= */
+#startup-loader {
+    position: fixed;
+    inset: 0;
+    z-index: 99999;
+    background: radial-gradient(circle at center, #102b46 0%, #06111e 55%, #030a12 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity .45s ease, visibility .45s ease;
+}
+#startup-loader.hide {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+.startup-content {
+    text-align: center;
+    animation: startupPop .7s ease both;
+}
+.startup-emoji {
+    font-size: 76px;
+    display: block;
+    margin-bottom: 14px;
+    animation: startupGame 1s ease-in-out infinite;
+}
+.startup-title {
+    font-size: 34px;
+    font-weight: 800;
+    letter-spacing: .5px;
+}
+.startup-title span { color: var(--blue); }
+.startup-text {
+    color: #8da0b5;
+    margin-top: 10px;
+    font-size: 15px;
+}
+.startup-spinner {
+    width: 42px;
+    height: 42px;
+    border: 4px solid rgba(255,255,255,.15);
+    border-top-color: var(--blue);
+    border-radius: 50%;
+    margin: 22px auto 0;
+    animation: startupSpin .8s linear infinite;
+}
+.startup-dots {
+    margin-top: 13px;
+    color: var(--blue);
+    font-size: 22px;
+    letter-spacing: 5px;
+}
+@keyframes startupSpin { to { transform: rotate(360deg); } }
+@keyframes startupGame {
+    0%, 100% { transform: translateY(0) rotate(-4deg) scale(1); }
+    50% { transform: translateY(-9px) rotate(4deg) scale(1.05); }
+}
+@keyframes startupPop {
+    from { opacity: 0; transform: scale(.9); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+
+/* ================= GAME DETAILS ================= */
+.game-details-overlay{position:fixed;inset:0;background:rgba(4,10,18,.88);backdrop-filter:blur(8px);z-index:5000;display:none;align-items:center;justify-content:center;padding:24px;overflow-y:auto}.game-details-overlay.show{display:flex}.game-details{width:min(1050px,100%);max-height:92vh;overflow:auto;background:#101a27;border:1px solid #29425d;border-radius:16px;box-shadow:0 25px 80px rgba(0,0,0,.55);position:relative}.game-details-close{position:absolute;right:16px;top:14px;width:40px;height:40px;border:0;border-radius:50%;background:rgba(0,0,0,.55);color:#fff;font-size:25px;cursor:pointer;z-index:2}.game-details-hero{height:310px;position:relative;overflow:hidden}.game-details-hero img{width:100%;height:100%;object-fit:cover}.game-details-hero:after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,#101a27 0%,rgba(16,26,39,.15) 70%,transparent)}.game-details-content{padding:0 30px 30px;position:relative;margin-top:-75px;z-index:1}.game-details-content h2{font-size:32px;margin:0 0 8px;color:#fff}.game-details-meta{color:#a8b7c8;margin-bottom:18px}.game-details-description{color:#d8e1ea;line-height:1.8;font-size:15px}.game-details-price{font-size:26px;font-weight:800;color:#66c0f4}.game-details-actions{display:flex;gap:10px;align-items:center;margin:20px 0}.game-details-buy{border:0;border-radius:7px;padding:12px 22px;background:#1a9fff;color:white;font-weight:700;cursor:pointer}.game-details-gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:22px}.game-details-gallery img{width:100%;height:150px;object-fit:cover;border-radius:8px;border:1px solid #263b50}.game-details-trailer{margin-top:28px}.game-details-trailer h3{margin:0 0 12px}.game-details-video{position:relative;width:100%;aspect-ratio:16/9;background:#080d14;border-radius:10px;overflow:hidden;border:1px solid #263b50}.game-details-video iframe{width:100%;height:100%;border:0}.youtube-fallback{display:flex;justify-content:center;margin-top:10px}.youtube-fallback a{color:#fff;background:#ff0000;padding:10px 16px;border-radius:7px;text-decoration:none;font-weight:700}.game-details-info-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:22px}.game-info-box{background:#172333;border-radius:9px;padding:14px}.game-info-box small{display:block;color:#7890a7;margin-bottom:5px}.game-info-box strong{color:#eaf2f8}@media(max-width:700px){.game-details-overlay{padding:10px}.game-details-hero{height:210px}.game-details-content{padding:0 18px 22px;margin-top:-45px}.game-details-content h2{font-size:25px}.game-details-gallery{grid-template-columns:1fr 1fr}.game-details-gallery img{height:110px}.game-details-video{aspect-ratio:16/9}.game-details-info-grid{grid-template-columns:1fr 1fr}}
+
+
+/* ===== Full functionality upgrade ===== */
+.extra-panel{position:fixed;inset:0;background:rgba(0,0,0,.72);z-index:5000;display:none;align-items:center;justify-content:center;padding:18px}
+.extra-panel.show{display:flex}
+.extra-panel-card{position:relative;width:min(560px,100%);max-height:90vh;overflow:auto;background:#0e1825;border:1px solid #2a4057;border-radius:16px;padding:28px;color:#eef6ff;box-shadow:0 25px 80px rgba(0,0,0,.55)}
+.wide-panel,.admin-card{width:min(980px,100%)}
+.extra-close{position:absolute;right:14px;top:10px;background:transparent;border:0;color:#9fb4c9;font-size:30px;cursor:pointer}
+.panel-note{color:#91a5b8;line-height:1.7}
+.admin-tabs{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0}
+.admin-tabs button,.admin-action{border:1px solid #294158;background:#142538;color:#eaf4ff;padding:10px 14px;border-radius:8px;cursor:pointer}
+.admin-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:18px}
+.admin-stat{background:#132234;border:1px solid #233b53;border-radius:10px;padding:15px}.admin-stat b{font-size:24px;display:block;margin-top:5px}
+.admin-form{display:grid;grid-template-columns:1fr 1fr;gap:10px}.admin-form input,.admin-form textarea,.admin-form select{width:100%;box-sizing:border-box;background:#09131f;color:#fff;border:1px solid #294158;border-radius:8px;padding:11px}.admin-form textarea{min-height:90px;grid-column:1/-1}.admin-form .full{grid-column:1/-1}.admin-list{display:grid;gap:9px}.admin-row{display:flex;justify-content:space-between;gap:12px;align-items:center;background:#111f2e;border:1px solid #23394f;border-radius:9px;padding:12px}.admin-row small{color:#8fa4b8}.account-info{display:grid;gap:10px;margin:18px 0}.account-info div{background:#132234;padding:13px;border-radius:9px}.account-actions{display:flex;gap:9px;flex-wrap:wrap}.account-actions button{border:0;border-radius:8px;padding:10px 14px;cursor:pointer}.account-name{background:transparent;border:0;color:#eaf2f8;font-weight:700}.download-btn{display:inline-block;background:#1b76d1;color:white;text-decoration:none;padding:9px 13px;border-radius:7px;margin-top:8px}.content-card{background:#132234;border:1px solid #253c52;padding:16px;border-radius:10px;margin-top:12px}
+@media(max-width:700px){.admin-grid,.admin-form{grid-template-columns:1fr}.admin-form textarea,.admin-form .full{grid-column:auto}.admin-row{align-items:flex-start;flex-direction:column}}
+
+
+/* ================= AUTH GATE ================= */
+#auth-gate{position:fixed;inset:0;z-index:1900;display:none;align-items:center;justify-content:center;background:radial-gradient(circle at 50% -10%,rgba(31,206,106,.24),transparent 34%),radial-gradient(circle at 85% 80%,rgba(20,168,84,.12),transparent 30%),linear-gradient(135deg,#030913 0%,#071523 48%,#030811 100%);padding:20px;overflow:hidden}
+#auth-gate.show{display:flex}
+#auth-gate:before,#auth-gate:after{content:"";position:absolute;border-radius:50%;filter:blur(2px);pointer-events:none}
+#auth-gate:before{width:420px;height:420px;top:-210px;left:-140px;background:rgba(31,206,106,.09);border:1px solid rgba(31,206,106,.12)}
+#auth-gate:after{width:520px;height:520px;bottom:-300px;right:-180px;background:rgba(20,168,84,.08);border:1px solid rgba(31,206,106,.1)}
+.auth-gate-card{position:relative;width:min(470px,100%);padding:42px 34px 30px;text-align:center;background:linear-gradient(145deg,rgba(14,31,48,.97),rgba(6,17,30,.98));border:1px solid rgba(72,157,218,.35);border-radius:24px;box-shadow:0 35px 100px rgba(0,0,0,.7),0 0 60px rgba(31,206,106,.08);backdrop-filter:blur(18px);animation:gateIn .45s ease both}
+.auth-gate-card:before{content:"";position:absolute;inset:0;border-radius:24px;padding:1px;background:linear-gradient(135deg,rgba(31,206,106,.5),transparent 35%,rgba(31,206,106,.12));-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none}
+@keyframes gateIn{from{opacity:0;transform:translateY(18px) scale(.97)}to{opacity:1;transform:translateY(0) scale(1)}}
+.auth-gate-logo{width:82px;height:82px;margin:0 auto 18px;display:flex;align-items:center;justify-content:center;font-size:42px;border-radius:22px;background:linear-gradient(145deg,#1fce6a,#0d7a3d);box-shadow:0 12px 35px rgba(31,206,106,.28),inset 0 1px rgba(255,255,255,.3);transform:rotate(-3deg)}
+.auth-gate-card h1{font-size:38px;letter-spacing:-1px;margin-bottom:8px}.auth-gate-card h1 span{color:var(--blue);text-shadow:0 0 24px rgba(31,206,106,.35)}
+.auth-gate-subtitle{font-size:13px;color:#6f8ba5;text-transform:uppercase;letter-spacing:3px;margin-bottom:14px}
+.auth-gate-card p{color:#a9bac9;line-height:1.9;margin:0 auto 27px;max-width:360px}.auth-gate-buttons{display:grid;gap:12px}.auth-gate-buttons button{height:54px;border-radius:12px;border:1px solid rgba(31,206,106,.45);font-size:16px;font-weight:800;cursor:pointer;transition:.2s;position:relative;overflow:hidden}.auth-gate-buttons button:hover{transform:translateY(-2px)}.auth-gate-login{background:linear-gradient(135deg,#1fce6a,#14a854);color:#fff;box-shadow:0 10px 28px rgba(31,206,106,.2)}.auth-gate-signup{background:#0d1d2d;color:#fff;border-color:#294a64!important}.auth-gate-card small{display:flex;justify-content:center;gap:7px;align-items:center;color:#637c92;margin-top:21px;font-size:12px}.auth-gate-card small:before{content:"🔒"}
+@media(max-width:520px){.auth-gate-card{padding:34px 22px 25px}.auth-gate-card h1{font-size:32px}.auth-gate-logo{width:72px;height:72px;font-size:36px}}
+</style>
+</head>
+
+<body>
+<!-- ================= LOGIN GATE ================= -->
+<div id="auth-gate">
+  <div class="auth-gate-card">
+    <div class="auth-gate-logo">🎮</div>
+    <div class="auth-gate-subtitle">Premium Gaming Store</div>
+    <h1>Tia <span>Games</span></h1>
+    <p>لازم تسجل دخول أو تنشئ حساب عشان تدخل المتجر وتستخدم مكتبتك وسلة المشتريات.</p>
+    <div class="auth-gate-buttons">
+      <button class="auth-gate-login" onclick="openLogin()">🔐 تسجيل الدخول</button>
+      <button class="auth-gate-signup" onclick="openSignup()">✨ إنشاء حساب جديد</button>
+    </div>
+    <small>تسجيل الدخول يحافظ على حسابك ومشترياتك.</small>
+  </div>
+</div>
+
+
+<!-- Startup loading screen -->
+<div id="startup-loader">
+    <div class="startup-content">
+        <span class="startup-emoji">🎮</span>
+        <div class="startup-title">Tia <span>Games</span></div>
+        <div class="startup-text">جاري تحميل المتجر...</div>
+        <div class="startup-spinner"></div>
+        <div class="startup-dots">•••</div>
+    </div>
+</div>
+
+
+<!-- ================= NAVBAR ================= -->
+
+<nav class="navbar">
+
+    <div class="logo" onclick="goHome()">
+        <svg class="logo-icon" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+                <linearGradient id="logoGrad" x1="0" y1="0" x2="48" y2="48" gradientUnits="userSpaceOnUse">
+                    <stop offset="0" stop-color="#2be27f"/>
+                    <stop offset="1" stop-color="#0d7a3d"/>
+                </linearGradient>
+            </defs>
+            <rect width="48" height="48" rx="13" fill="url(#logoGrad)"/>
+            <rect x="9" y="17" width="30" height="15" rx="7.5" fill="#ffffff"/>
+            <rect x="14.5" y="21.8" width="7" height="2.4" rx="1.2" fill="#0d7a3d"/>
+            <rect x="17.2" y="19.1" width="2.4" height="7" rx="1.2" fill="#0d7a3d"/>
+            <circle cx="29.5" cy="21.8" r="1.9" fill="#0d7a3d"/>
+            <circle cx="33.5" cy="25.8" r="1.9" fill="#0d7a3d"/>
+        </svg>
+        Tia<span>Games</span>
+    </div>
+
+    <div class="nav-links">
+
+        <button class="active" onclick="goHome()" data-ar="المتجر" data-en="Store">
+            المتجر
+        </button>
+
+        <button onclick="showLibrary()" data-ar="المكتبة" data-en="Library">
+            المكتبة
+        </button>
+
+        <button onclick="showCommunity()" data-ar="المجتمع" data-en="Community">
+            المجتمع
+        </button>
+
+        <button onclick="showNews()" data-ar="الأخبار" data-en="News">
+            الأخبار
+        </button>
+
+        <button onclick="openAdminPanel()" data-ar="لوحة التحكم" data-en="Admin">
+            🔧 Admin
+        </button>
+
+    </div>
+
+    <div class="nav-right">
+
+        <div class="search-box">
+
+            <span class="search-icon">🔎</span>
+
+            <input
+                id="search"
+                class="search"
+                type="text"
+                placeholder="ابحث عن لعبة أو مطور..."
+                oninput="searchGames()"
+            >
+
+        </div>
+
+        <select id="language" class="language" onchange="changeLanguage()">
+            <option value="ar">🌐 العربية</option>
+            <option value="en">🌐 English</option>
+        </select>
+
+        <div id="guestAuth" class="account-area show">
+            <button class="login-btn" onclick="openLogin()" data-ar="تسجيل الدخول" data-en="Login">
+                تسجيل الدخول
+            </button>
+
+            <button class="signup-btn" onclick="openSignup()" data-ar="إنشاء حساب" data-en="Sign Up">
+                إنشاء حساب
+            </button>
+        </div>
+
+        <div id="userAuth" class="account-area">
+            <button class="account-name" onclick="openAccountPanel()" id="accountName">حسابي</button>
+            <button class="logout-btn" onclick="logoutUser()" data-ar="تسجيل الخروج" data-en="Logout">
+                تسجيل الخروج
+            </button>
+        </div>
+
+    </div>
+
+</nav>
+
+
+<!-- ================= STORE ================= -->
+
+<main id="storePage" class="container store-page">
+
+    <!-- HERO -->
+
+    <section class="hero" id="heroSection">
+
+        <div class="hero-content" id="heroContent">
+
+            <div class="hero-small">
+                TIA GAMES
+            </div>
+
+            <h1>
+                مرحبًا بيك في<br>
+                Tia Games
+            </h1>
+
+            <p>
+                متجرك لألعاب الفيديو. تصفح المكتبة وابدأ اللعب.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- COMING SOON -->
+
+    <section id="comingSoonSection" style="display:none">
+
+        <div class="section-header">
+            <h2>🔜 قريبًا</h2>
+        </div>
+
+        <div class="games" id="comingSoonGames"></div>
+
+    </section>
+
+
+    <!-- FEATURED -->
+
+    <div class="section-header">
+
+        <h2 data-ar="⭐ الألعاب المميزة" data-en="⭐ Featured Games">
+            ⭐ الألعاب المميزة
+        </h2>
+
+        <a onclick="showAllGames()" data-ar="عرض الكل ←" data-en="View All →">
+            عرض الكل ←
+        </a>
+
+    </div>
+
+
+    <div class="store-layout">
+
+        <section>
+
+            <div class="games" id="games">
+
+                <p class="panel-note" id="gamesEmptyMsg">جاري تحميل الألعاب...</p>
+
+            </div>
+
+        </section>
+
+
+        <!-- SIDEBAR -->
+
+        <aside class="sidebar">
+
+            <div class="side-box">
+
+                <h3 data-ar="تصفح حسب الفئة" data-en="Browse by Category">
+                    تصفح حسب الفئة
+                </h3>
+
+                <ul class="categories">
+
+                    <li>⚔️ أكشن</li>
+                    <li>🗺️ مغامرات</li>
+                    <li>🏁 سباق</li>
+                    <li>👻 رعب</li>
+                    <li>⚽ رياضة</li>
+                    <li>🔫 تصويب</li>
+                    <li>👑 استراتيجية</li>
+                    <li>👥 ألعاب جماعية</li>
+                    <li>▦ أخرى</li>
+
+                </ul>
+
+            </div>
+
+        </aside>
+
+    </div>
+
+
+    <!-- FEATURES -->
+
+    <div class="features">
+
+        <div class="feature">
+
+            <div class="feature-icon">🎧</div>
+
+            <h3>دعم 24/7</h3>
+
+            <p>
+                فريق الدعم جاهز لمساعدتك في أي وقت.
+            </p>
+
+        </div>
+
+        <div class="feature">
+
+            <div class="feature-icon">🛡️</div>
+
+            <h3>دفع آمن</h3>
+
+            <p>
+                معاملات آمنة ومشفرة لحماية حسابك.
+            </p>
+
+        </div>
+
+        <div class="feature">
+
+            <div class="feature-icon">⚡</div>
+
+            <h3>تحميل سريع</h3>
+
+            <p>
+                استمتع بألعابك بسرعة وسهولة.
+            </p>
+
+        </div>
+
+        <div class="feature">
+
+            <div class="feature-icon">🎮</div>
+
+            <h3>مكتبة ضخمة</h3>
+
+            <p>
+                اكتشف ألعابًا جديدة كل يوم.
+            </p>
+
+        </div>
+
+    </div>
+
+</main>
+
+
+<!-- ================= LIBRARY ================= -->
+
+<section id="libraryPage" class="container library-page">
+
+    <div class="section-header">
+
+        <h2>📚 مكتبة ألعابي</h2>
+
+        <a onclick="goHome()">
+            العودة للمتجر
+        </a>
+
+    </div>
+
+    <div id="libraryContent"></div>
+
+</section>
+
+
+<!-- ================= CART ================= -->
+
+<div id="cartPanel" class="cart-panel">
+
+    <div class="cart-header">
+
+        <h2>🛒 السلة</h2>
+
+        <button class="cart-close" onclick="toggleCart()">
+            ×
+        </button>
+
+    </div>
+
+    <div id="cartItems"></div>
+
+    <div class="cart-total">
+
+        <span>
+            الإجمالي
+        </span>
+
+        <span id="cartTotal" class="price">
+            $0.00
+        </span>
+
+    </div>
+
+    <button
+        class="full-btn"
+        onclick="checkout()"
+    >
+        إتمام الشراء
+    </button>
+
+</div>
+
+
+<button class="cart-floating" onclick="toggleCart()">
+    🛒
+</button>
+
+
+<!-- ================= LOGIN MODAL ================= -->
+
+<div id="loginModal" class="modal">
+
+    <div class="modal-box">
+
+        <button class="close" onclick="closeModal('loginModal')">
+            ×
+        </button>
+
+        <h2>تسجيل الدخول</h2>
+
+        <p class="modal-subtitle">
+            أهلاً بك في Tia Games
+        </p>
+
+        <input
+            id="loginEmail"
+            class="input"
+            type="email"
+            placeholder="البريد الإلكتروني"
+        >
+
+        <input
+            id="loginPassword"
+            class="input"
+            type="password"
+            placeholder="كلمة المرور"
+        >
+
+        <button class="full-btn" onclick="loginUser()">
+            تسجيل الدخول
+        </button>
+
+        <button class="facebook" onclick="facebookLogin()">
+            🔵 تسجيل الدخول باستخدام Facebook
+        </button>
+
+        <div class="modal-switch">
+
+            ليس لديك حساب؟
+            <span onclick="switchToSignup()">
+                إنشاء حساب
+            </span>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- ================= SIGNUP MODAL ================= -->
+
+<div id="signupModal" class="modal">
+
+    <div class="modal-box">
+
+        <button class="close" onclick="closeModal('signupModal')">
+            ×
+        </button>
+
+        <h2>إنشاء حساب</h2>
+
+        <p class="modal-subtitle">
+            أنشئ حسابك في Tia Games
+        </p>
+
+        <input
+            id="signupName"
+            class="input"
+            type="text"
+            placeholder="اسم المستخدم"
+        >
+
+        <input
+            id="signupEmail"
+            class="input"
+            type="email"
+            placeholder="البريد الإلكتروني"
+        >
+
+        <input
+            id="signupPassword"
+            class="input"
+            type="password"
+            placeholder="كلمة المرور"
+        >
+
+        <button class="full-btn" onclick="signupUser()">
+            إنشاء الحساب
+        </button>
+
+        <button class="facebook" onclick="facebookLogin()">
+            🔵 التسجيل باستخدام Facebook
+        </button>
+
+        <div class="modal-switch">
+
+            لديك حساب بالفعل؟
+            <span onclick="switchToLogin()">
+                تسجيل الدخول
+            </span>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- ================= GAME DETAILS MODAL ================= -->
+<div id="gameDetailsOverlay" class="game-details-overlay" onclick="closeGameDetails(event)">
+  <div class="game-details" onclick="event.stopPropagation()">
+    <button class="game-details-close" onclick="closeGameDetails()">×</button>
+    <div class="game-details-hero"><img id="detailsHero" src="" alt=""></div>
+    <div class="game-details-content">
+      <h2 id="detailsTitle"></h2>
+      <div id="detailsMeta" class="game-details-meta"></div>
+      <p id="detailsDescription" class="game-details-description"></p>
+      <div class="game-details-actions">
+        <span id="detailsPrice" class="game-details-price"></span>
+        <button id="detailsCartBtn" class="game-details-buy">🛒 أضف إلى السلة</button>
+      </div>
+      <div id="detailsInfoGrid" class="game-details-info-grid"></div>
+      <h3 style="margin-top:28px">📸 صور من اللعبة</h3>
+      <div id="detailsGallery" class="game-details-gallery"></div>
+      <div class="game-details-trailer">
+        <h3>▶️ الإعلان الرسمي على YouTube</h3>
+        <div class="game-details-video">
+          <iframe id="detailsTrailer" title="Game trailer" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+        </div>
+        <div class="youtube-fallback"><a id="youtubeTrailerLink" href="#" target="_blank" rel="noopener">▶ مشاهدة الإعلان على YouTube</a></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ================= ACCOUNT / ADMIN ================= -->
+<div id="accountPanel" class="extra-panel" onclick="closeExtraPanel(event)">
+  <div class="extra-panel-card" onclick="event.stopPropagation()">
+    <button class="extra-close" onclick="closeExtraPanel()">×</button>
+    <h2>👤 حسابي</h2>
+    <div id="accountPanelContent"></div>
+  </div>
+</div>
+
+<div id="adminPanel" class="extra-panel" onclick="closeAdminPanel(event)">
+  <div class="extra-panel-card admin-card" onclick="event.stopPropagation()">
+    <button class="extra-close" onclick="closeAdminPanel()">×</button>
+    <h2>🔧 Tia Games Admin</h2>
+    <p class="panel-note">إدارة الألعاب والطلبات والمستخدمين. الدفع والتنزيلات الحقيقية تحتاج روابط/بوابة دفع وملفاتك الفعلية.</p>
+    <div class="admin-tabs">
+      <button onclick="adminTab('games')">🎮 الألعاب</button>
+      <button onclick="adminTab('orders')">🧾 الطلبات</button>
+      <button onclick="adminTab('users')">👥 المستخدمون</button>
+    </div>
+    <div id="adminContent"></div>
+  </div>
+</div>
+
+<!-- ================= COMMUNITY / NEWS ================= -->
+<div id="contentPanel" class="extra-panel" onclick="closeContentPanel(event)">
+  <div class="extra-panel-card wide-panel" onclick="event.stopPropagation()">
+    <button class="extra-close" onclick="closeContentPanel()">×</button>
+    <div id="contentPanelBody"></div>
+  </div>
+</div>
+
+<!-- ================= TOAST ================= -->
+
+<div id="toast" class="toast"></div>
+
+
+<footer>
+
+    <div class="footer-content">
+
+        <div>
+
+            <div class="footer-logo">
+                <svg width="24" height="24" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" style="vertical-align:-6px;margin-left:4px">
+                    <rect width="48" height="48" rx="13" fill="url(#logoGrad)"/>
+                    <rect x="9" y="17" width="30" height="15" rx="7.5" fill="#ffffff"/>
+                    <rect x="14.5" y="21.8" width="7" height="2.4" rx="1.2" fill="#0d7a3d"/>
+                    <rect x="17.2" y="19.1" width="2.4" height="7" rx="1.2" fill="#0d7a3d"/>
+                    <circle cx="29.5" cy="21.8" r="1.9" fill="#0d7a3d"/>
+                    <circle cx="33.5" cy="25.8" r="1.9" fill="#0d7a3d"/>
+                </svg>
+                Tia<span>Games</span>
+            </div>
+
+            <p style="margin-top:8px">
+                ألعاب • مجتمع • تجربة أفضل
+            </p>
+
+        </div>
+
+        <div>
+            © 2026 Tia Games
+        </div>
+
+    </div>
+
+</footer>
+
+
+<script type="module">
+
+/* =====================================================
+   TIA GAMES
+   MAIN JAVASCRIPT + FIREBASE AUTHENTICATION
+===================================================== */
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
+import {
+    getAuth,
+    createUserWithEmailAndPassword,
+    signInWithEmailAndPassword,
+    signOut,
+    onAuthStateChanged,
+    updateProfile
+} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
+import {
+    getFirestore, doc, setDoc, getDoc, deleteDoc, collection, getDocs, addDoc,
+    serverTimestamp, query, orderBy, limit, where
+} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
+// ملفات الألعاب بتتحفظ كرابط تحميل خارجي، أما صور الألعاب فتُختار من الجهاز وتُضغط قبل حفظها داخل Firestore.
+
+const firebaseConfig = {
+    apiKey: "AIzaSyD8oO4K-GIeP-mGNmqFPXlbUVq7R_z4vDU",
+    authDomain: "tia-gameng.firebaseapp.com",
+    projectId: "tia-gameng",
+    storageBucket: "tia-gameng.firebasestorage.app",
+    messagingSenderId: "15412888932",
+    appId: "1:15412888932:web:0eef3c9417d6b615f22671",
+    measurementId: "G-LBTXTBKT73"
+};
+
+const firebaseApp = initializeApp(firebaseConfig);
+const auth = getAuth(firebaseApp);
+const db = getFirestore(firebaseApp);
+
+// ضع بريد حسابك هنا بعد إنشاء الحساب ليظهر لك زر لوحة التحكم.
+const ADMIN_EMAILS = ["shadyayaad4@icloud.com"];
+let cloudReady = false;
+
+
+/* ================= DATA ================= */
+// الألعاب بتتحمل ديناميكيًا من Firestore (شوف loadGamesFromCloud بالأسفل).
+let games = [];
+
+
+/* ================= STORAGE ================= */
+
+let cart = JSON.parse(localStorage.getItem("tiaCart") || "[]");
+let library = JSON.parse(localStorage.getItem("tiaLibrary") || "[]");
+let currentUserData = null;
+
+function isAdmin(){
+    if(!auth.currentUser) return false;
+    const email = (auth.currentUser.email || "").toLowerCase();
+    if(ADMIN_EMAILS.map(e => e.toLowerCase()).includes(email)) return true;
+    return currentUserData?.role === "admin";
+}
+
+async function syncUserCloud(user){
+    if(!user) return;
+    try{
+        const ref=doc(db,"users",user.uid);
+        const snap=await getDoc(ref);
+        if(!snap.exists()){
+            await setDoc(ref,{uid:user.uid,email:user.email||"",displayName:user.displayName||"",role:"user",createdAt:serverTimestamp(),updatedAt:serverTimestamp()},{merge:true});
+            currentUserData={uid:user.uid,email:user.email||"",displayName:user.displayName||"",role:"user"};
+        } else {
+            currentUserData=snap.data();
+        }
+        const cartSnap=await getDoc(doc(db,"users",user.uid,"private","cart"));
+        const libSnap=await getDoc(doc(db,"users",user.uid,"private","library"));
+        if(cartSnap.exists()) cart=cartSnap.data().items||cart;
+        if(libSnap.exists()) library=libSnap.data().items||library;
+        localStorage.setItem("tiaCart",JSON.stringify(cart));
+        localStorage.setItem("tiaLibrary",JSON.stringify(library));
+        cloudReady=true;
+        updateCart();
+    }catch(e){console.warn("Cloud sync:",e); cloudReady=false;}
+}
+
+async function saveCloudData(){
+    const user=auth.currentUser; if(!user) return;
+    try{
+        await setDoc(doc(db,"users",user.uid,"private","cart"),{items:cart,updatedAt:serverTimestamp()},{merge:true});
+        await setDoc(doc(db,"users",user.uid,"private","library"),{items:library,updatedAt:serverTimestamp()},{merge:true});
+    }catch(e){console.warn("Cloud save:",e);}
+}
+
+
+/* ================= HOME ================= */
+
+function goHome() {
+
+    document
+        .getElementById("storePage")
+        .classList.remove("hidden");
+
+    document
+        .getElementById("libraryPage")
+        .classList.remove("show");
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+
+}
+
+
+/* ================= SEARCH ================= */
+
+function searchGames() {
+
+    const value =
+        document
+        .getElementById("search")
+        .value
+        .trim()
+        .toLowerCase();
+
+    const cards =
+        document.querySelectorAll(".game-card");
+
+    cards.forEach(card => {
+
+        const name =
+            card.dataset.name.toLowerCase();
+
+        if (name.includes(value)) {
+
+            card.style.display = "";
+
+        } else {
+
+            card.style.display = "none";
+
+        }
+
+    });
+
+}
+
+
+/* ================= GAME ================= */
+
+/* ================= REAL GAMES (Firestore) ================= */
+
+function findGame(name){
+    return games.find(g => g.name === name);
+}
+
+function formatPrice(price){
+    const p = Number(price||0);
+    return p > 0 ? ("$" + p.toFixed(2)) : "مجاني";
+}
+
+async function loadGamesFromCloud(){
+    try{
+        const qs = await getDocs(collection(db,"games"));
+        games = qs.docs.map(d => ({ id:d.id, ...d.data() }));
+        cloudReady = true;
+    }catch(e){
+        console.warn("تعذر تحميل الألعاب:", e);
+        games = [];
+    }
+    renderStoreGames();
+    renderHero();
+    const adminList = document.getElementById("adminGameList");
+    if(adminList) renderAdminGames();
+}
+
+function renderHero(){
+    const content = document.getElementById("heroContent");
+    if(!content) return;
+    if(!games.length){
+        content.innerHTML = `
+            <div class="hero-small">TIA GAMES</div>
+            <h1>مرحبًا بيك في<br>Tia Games</h1>
+            <p>متجرك لألعاب الفيديو. تصفح المكتبة وابدأ اللعب.</p>`;
+        return;
+    }
+    const g = games[0];
+    content.innerHTML = `
+        <div class="hero-small">TIA GAMES</div>
+        <h1>${g.name}</h1>
+        <p>${g.description ? g.description.slice(0,140) : "اكتشف اللعبة دلوقتي على Tia Games."}</p>
+        <div class="hero-buttons">
+            <button class="primary-btn" onclick="openGame('${String(g.name).replace(/'/g,"\\'")}')">التفاصيل</button>
+            <span class="hero-price">${formatPrice(g.price)}</span>
+        </div>`;
+}
+
+function renderStoreGames(){
+    const el = document.getElementById("games");
+    if(!el) return;
+    if(!games.length){
+        el.innerHTML = `<p class="panel-note">لسه مفيش ألعاب مضافة. هتظهر هنا أول ما تضيفها من لوحة التحكم 🎮</p>`;
+        return;
+    }
+    el.innerHTML = games.map(g => `
+        <div class="game-card" data-name="${g.name}" onclick="openGame('${String(g.name).replace(/'/g,"\\'")}')">
+            <div class="game-image">
+                <img src="${g.image || 'https://placehold.co/600x338/0c1d2e/8da0b5?text=' + encodeURIComponent(g.name)}" alt="${g.name}" onerror="this.onerror=null;this.src='https://placehold.co/600x338/0c1d2e/8da0b5?text=' + encodeURIComponent('${String(g.name).replace(/'/g,"\\'")}');">
+            </div>
+            <div class="game-info">
+                <h3>${g.name}</h3>
+                <p>${g.genre || "Game"}</p>
+                <div class="game-bottom">
+                    <span class="price">${formatPrice(g.price)}</span>
+                    <button class="cart-btn" onclick="addCartClick(event,'${String(g.name).replace(/'/g,"\\'")}',${Number(g.price||0)})">🛒</button>
+                </div>
+            </div>
+        </div>
+    `).join("");
+}
+
+function openGame(name) {
+    const game = findGame(name) || {price:0, genre:"Game", developer:"Tia Games", platform:"PC", image:"", description:"معلومات اللعبة ستتوفر قريبًا."};
+    document.getElementById("detailsTitle").textContent = name;
+    document.getElementById("detailsMeta").textContent = game.genre || "Game";
+    document.getElementById("detailsDescription").textContent = game.description || "";
+    document.getElementById("detailsPrice").textContent = formatPrice(game.price);
+    const hero = document.getElementById("detailsHero"); hero.src = game.image || ""; hero.alt = name;
+    document.getElementById("detailsInfoGrid").innerHTML = `
+      <div class="game-info-box"><small>المطور</small><strong>${game.developer || "Tia Games"}</strong></div>
+      <div class="game-info-box"><small>المنصات</small><strong>${game.platform || "PC"}</strong></div>
+      <div class="game-info-box"><small>السعر</small><strong>${formatPrice(game.price)}</strong></div>`;
+    document.getElementById("detailsGallery").innerHTML = game.image ? `<img src="${game.image}" alt="${name} screenshot">` : "";
+
+    const trailerSearch = game.trailer || (name + " official trailer");
+    const youtubeSearchUrl = "https://www.youtube.com/results?search_query=" + encodeURIComponent(trailerSearch);
+    document.getElementById("detailsTrailer").src = "https://www.youtube.com/embed?listType=search&list=" + encodeURIComponent(trailerSearch);
+    document.getElementById("youtubeTrailerLink").href = youtubeSearchUrl;
+
+    document.getElementById("detailsCartBtn").onclick = () => addToCart(name, Number(game.price||0));
+    document.getElementById("gameDetailsOverlay").classList.add("show");
+    document.body.style.overflow = "hidden";
+}
+
+function closeGameDetails(event) {
+    if (event && event.target !== document.getElementById("gameDetailsOverlay")) return;
+    document.getElementById("gameDetailsOverlay").classList.remove("show");
+    document.body.style.overflow = "";
+}
+
+
+/* ================= CART ================= */
+
+function addCartClick(event, name, price) {
+
+    event.stopPropagation();
+
+    addToCart(name, price);
+
+}
+
+
+function addToCart(name, price) {
+
+    const exists =
+        cart.find(item => item.name === name);
+
+    if (exists) {
+
+        showToast("اللعبة موجودة بالفعل في السلة 🛒");
+        return;
+
+    }
+
+    cart.push({
+        name: name,
+        price: price
+    });
+
+    saveCart();
+
+    updateCart();
+
+    showToast(
+        "تمت إضافة " + name + " إلى السلة 🛒"
+    );
+
+}
+
+
+function saveCart() {
+    localStorage.setItem("tiaCart",JSON.stringify(cart));
+    saveCloudData();
+}
+
+
+function toggleCart() {
+
+    document
+        .getElementById("cartPanel")
+        .classList.toggle("open");
+
+    updateCart();
+
+}
+
+
+function updateCart() {
+
+    const container =
+        document.getElementById("cartItems");
+
+    const totalElement =
+        document.getElementById("cartTotal");
+
+    if (!cart.length) {
+
+        container.innerHTML = `
+            <div style="
+                text-align:center;
+                color:#8295a9;
+                padding:50px 10px;
+            ">
+                🛒
+                <br><br>
+                السلة فارغة
+            </div>
+        `;
+
+        totalElement.textContent = "$0.00";
+
+        return;
+    }
+
+    let total = 0;
+
+    container.innerHTML = "";
+
+    cart.forEach((item, index) => {
+
+        total += item.price;
+
+        const div =
+            document.createElement("div");
+
+        div.className = "cart-item";
+
+        div.innerHTML = `
+
+            <div class="cart-item-title">
+                ${item.name}
+            </div>
+
+            <div style="
+                display:flex;
+                justify-content:space-between;
+                align-items:center;
+            ">
+
+                <span class="cart-item-price">
+                    ${formatPrice(item.price)}
+                </span>
+
+                <button
+                    onclick="removeFromCart(${index})"
+                    style="
+                        background:#54202a;
+                        color:white;
+                        border:none;
+                        padding:6px 9px;
+                        border-radius:5px;
+                    "
+                >
+                    حذف
+                </button>
+
+            </div>
+
+        `;
+
+        container.appendChild(div);
+
+    });
+
+    totalElement.textContent = formatPrice(total);
+
+}
+
+
+function removeFromCart(index) {
+
+    cart.splice(index, 1);
+
+    saveCart();
+
+    updateCart();
+
+    showToast("تم حذف اللعبة من السلة");
+
+}
+
+
+/* ================= CHECKOUT ================= */
+
+async function checkout() {
+    if(!auth.currentUser){ showToast("سجّل الدخول أولًا لإتمام الشراء 🔐"); openLogin(); return; }
+    if(!cart.length){ showToast("السلة فارغة 🛒"); return; }
+    const total=cart.reduce((sum,x)=>sum+Number(x.price||0),0);
+    // Front-end order record. Connect a real Stripe/Paymob server endpoint before accepting live money.
+    try{
+        const orderRef=await addDoc(collection(db,"orders"),{
+            uid:auth.currentUser.uid,email:auth.currentUser.email||"",items:cart,total,currency:"USD",status: total>0 ? "pending_payment" : "free",createdAt:serverTimestamp()
+        });
+        if(total>0){
+            openPaymentPanel(orderRef.id,total);
+        } else {
+            showToast("الألعاب مجانية، بتتضاف لمكتبتك على طول 🎉");
+            await markDemoPaid(orderRef.id);
+        }
+    }catch(e){ console.error(e); showToast("تعذر إنشاء الطلب. تأكد من تفعيل Firestore"); }
+}
+
+function openPaymentPanel(orderId,total){
+    const body=document.getElementById("contentPanelBody");
+    body.innerHTML=`<h2>💳 إتمام الطلب</h2><div class="content-card"><p>رقم الطلب: <b>${orderId}</b></p><p>الإجمالي: <b>${formatPrice(total)}</b></p><p>تم تجهيز الطلب في Firebase. لإتمام الدفع الحقيقي نحتاج ربط بوابة مثل Stripe أو Paymob عبر Backend آمن.</p><button class="admin-action" onclick="markDemoPaid('${orderId}')">إتمام تجريبي وإضافة للمكتبة</button></div>`;
+    document.getElementById("contentPanel").classList.add("show");
+}
+
+async function markDemoPaid(orderId){
+    if(!auth.currentUser) return;
+    try{
+        await setDoc(doc(db,"orders",orderId),{status:"paid_demo",paidAt:serverTimestamp()},{merge:true});
+        cart.forEach(item=>{if(!library.some(g=>g.name===item.name)) library.push({...item,purchasedAt:new Date().toISOString()});});
+        localStorage.setItem("tiaLibrary",JSON.stringify(library));
+        await saveCloudData();
+        cart=[]; saveCart(); updateCart(); closeContentPanel(); showToast("تمت إضافة الألعاب للمكتبة 🎮");
+    }catch(e){console.error(e);showToast("حدث خطأ أثناء تحديث الطلب");}
+}
+
+/* ================= LIBRARY ================= */
+
+function showLibrary() {
+
+    document
+        .getElementById("storePage")
+        .classList.add("hidden");
+
+    document
+        .getElementById("libraryPage")
+        .classList.add("show");
+
+    renderLibrary();
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+
+}
+
+
+function renderLibrary() {
+
+    const container =
+        document.getElementById("libraryContent");
+
+    if (!library.length) {
+
+        container.innerHTML = `
+
+            <div class="library-empty">
+
+                <div>🎮</div>
+
+                <h2>
+                    مكتبتك فارغة
+                </h2>
+
+                <p>
+                    اشترِ ألعابك الأولى وستظهر هنا.
+                </p>
+
+                <button
+                    class="primary-btn"
+                    style="margin-top:20px"
+                    onclick="goHome()"
+                >
+                    تصفح الألعاب
+                </button>
+
+            </div>
+
+        `;
+
+        return;
+    }
+
+    container.innerHTML = `
+        <div class="games" style="
+            grid-template-columns:repeat(4,1fr);
+        ">
+        </div>
+    `;
+
+    const grid =
+        container.querySelector(".games");
+
+    library.forEach(game => {
+
+        const card =
+            document.createElement("div");
+
+        card.className = "game-card";
+
+        card.innerHTML = `
+
+            <div class="game-image">
+
+                <div style="
+                    height:100%;
+                    display:flex;
+                    align-items:center;
+                    justify-content:center;
+                    font-size:55px;
+                    background:linear-gradient(
+                        135deg,
+                        #12395a,
+                        #07111f
+                    );
+                ">
+                    🎮
+                </div>
+
+            </div>
+
+            <div class="game-info">
+
+                <h3>${game.name}</h3>
+
+                <p>
+                    موجودة في مكتبتك
+                </p>
+
+                <button
+                    class="primary-btn"
+                    style="width:100%"
+                    onclick="playGame('${game.name}')"
+                >
+                    تشغيل ▶
+                </button>
+
+            </div>
+
+        `;
+
+        grid.appendChild(card);
+
+    });
+
+}
+
+
+/* ================= PLAY ================= */
+
+async function playGame(name){
+    const game=findGame(name)||{};
+    const url=game.downloadUrl||game.download||"";
+    if(url){window.open(url,"_blank","noopener");return;}
+    showToast("📦 اللعبة موجودة في مكتبتك. أضف ملف اللعبة من لوحة Admin ليتوفر التحميل.");
+}
+
+
+/* ================= LOGIN ================= */
+
+function openLogin() {
+    document.getElementById("loginModal").classList.add("show");
+    setTimeout(() => document.getElementById("loginEmail")?.focus(), 50);
+}
+
+function openSignup() {
+    document.getElementById("signupModal").classList.add("show");
+    setTimeout(() => document.getElementById("signupName")?.focus(), 50);
+}
+
+function closeModal(id) {
+    document.getElementById(id).classList.remove("show");
+}
+
+function switchToSignup() {
+    closeModal("loginModal");
+    openSignup();
+}
+
+function switchToLogin() {
+    closeModal("signupModal");
+    openLogin();
+}
+
+function getFirebaseErrorMessage(error) {
+    const code = error?.code || "";
+    const messages = {
+        "auth/invalid-email": "البريد الإلكتروني غير صحيح",
+        "auth/missing-password": "اكتب كلمة المرور",
+        "auth/weak-password": "كلمة المرور ضعيفة — استخدم 6 أحرف على الأقل",
+        "auth/email-already-in-use": "البريد الإلكتروني مستخدم بالفعل",
+        "auth/invalid-credential": "البريد الإلكتروني أو كلمة المرور غير صحيحة",
+        "auth/user-not-found": "لا يوجد حساب بهذا البريد الإلكتروني",
+        "auth/wrong-password": "كلمة المرور غير صحيحة",
+        "auth/too-many-requests": "محاولات كثيرة. حاول مرة أخرى بعد قليل",
+        "auth/network-request-failed": "تأكد من اتصال الإنترنت وحاول مرة أخرى",
+        "auth/operation-not-allowed": "تسجيل الدخول بالبريد الإلكتروني غير مفعل في Firebase"
+    };
+    return messages[code] || "حدث خطأ أثناء العملية. حاول مرة أخرى";
+}
+
+async function loginUser() {
+    const email = document.getElementById("loginEmail").value.trim();
+    const password = document.getElementById("loginPassword").value;
+
+    if (!email || !password) {
+        showToast("اكتب البريد الإلكتروني وكلمة المرور");
+        return;
+    }
+
+    try {
+        await signInWithEmailAndPassword(auth, email, password);
+        document.getElementById("loginPassword").value = "";
+        closeModal("loginModal");
+        showToast("تم تسجيل الدخول بنجاح 👋");
+    } catch (error) {
+        console.error(error);
+        showToast(getFirebaseErrorMessage(error));
+    }
+}
+
+async function signupUser() {
+    const name = document.getElementById("signupName").value.trim();
+    const email = document.getElementById("signupEmail").value.trim();
+    const password = document.getElementById("signupPassword").value;
+
+    if (!name || !email || !password) {
+        showToast("املأ جميع البيانات");
+        return;
+    }
+
+    if (password.length < 6) {
+        showToast("كلمة المرور لازم تكون 6 أحرف على الأقل");
+        return;
+    }
+
+    try {
+        const credential = await createUserWithEmailAndPassword(auth, email, password);
+        await updateProfile(credential.user, { displayName: name });
+        await setDoc(doc(db,"users",credential.user.uid),{uid:credential.user.uid,email:email,displayName:name,createdAt:serverTimestamp(),updatedAt:serverTimestamp()},{merge:true});
+
+        document.getElementById("signupName").value = "";
+        document.getElementById("signupEmail").value = "";
+        document.getElementById("signupPassword").value = "";
+        closeModal("signupModal");
+        updateAuthUI(credential.user);
+        showToast("تم إنشاء الحساب بنجاح 🎉");
+    } catch (error) {
+        console.error(error);
+        showToast(getFirebaseErrorMessage(error));
+    }
+}
+
+async function logoutUser() {
+    try {
+        await signOut(auth);
+        showToast("تم تسجيل الخروج 👋");
+    } catch (error) {
+        console.error(error);
+        showToast("تعذر تسجيل الخروج. حاول مرة أخرى");
+    }
+}
+
+function updateAuthUI(user) {
+    const guestAuth = document.getElementById("guestAuth");
+    const userAuth = document.getElementById("userAuth");
+    const accountName = document.getElementById("accountName");
+
+    if (user) {
+        guestAuth.classList.remove("show");
+        userAuth.classList.add("show");
+        accountName.textContent = user.displayName || user.email?.split("@")[0] || "حسابك";
+        accountName.title = user.email || "";
+    } else {
+        userAuth.classList.remove("show");
+        guestAuth.classList.add("show");
+        accountName.textContent = "";
+    }
+}
+
+// Firebase keeps the authenticated session between visits by default.
+onAuthStateChanged(auth, async (user) => {
+    updateAuthUI(user);
+    const gate = document.getElementById("auth-gate");
+    if (gate) gate.classList.toggle("show", !user);
+    if(user){
+        await syncUserCloud(user);
+        if(isAdmin()) showToast("مرحبًا بالمدير 🔧");
+    }
+});
+
+/* ================= ACCOUNT / SOCIAL / ADMIN ================= */
+async function facebookLogin(){
+    showToast("🔵 Facebook جاهز للربط، لكن Meta OAuth يحتاج App ID/Secret وإعداد Authorized domains.");
+}
+
+function openAccountPanel(){
+    const u=auth.currentUser; if(!u){openLogin();return;}
+    const body=document.getElementById("accountPanelContent");
+    body.innerHTML=`<div class="account-info"><div><small>الاسم</small><br><b>${u.displayName||"غير محدد"}</b></div><div><small>البريد</small><br><b>${u.email||""}</b></div><div><small>الألعاب في المكتبة</small><br><b>${library.length}</b></div></div><div class="account-actions"><button onclick="showLibrary();closeExtraPanel()">📚 مكتبتي</button><button onclick="logoutUser();closeExtraPanel()">🚪 تسجيل الخروج</button>${isAdmin()?'<button onclick="openAdminPanel();closeExtraPanel()">🔧 لوحة التحكم</button>':''}</div>`;
+    document.getElementById("accountPanel").classList.add("show");
+}
+function closeExtraPanel(e){if(!e||e.target.id==="accountPanel")document.getElementById("accountPanel").classList.remove("show");}
+function closeAdminPanel(e){if(!e||e.target.id==="adminPanel")document.getElementById("adminPanel").classList.remove("show");}
+function closeContentPanel(e){if(!e||e.target.id==="contentPanel")document.getElementById("contentPanel").classList.remove("show");}
+
+function openAdminPanel(){
+    if(!isAdmin()){showToast("هذه الصفحة للمدير فقط 🔒");return;}
+    document.getElementById("adminPanel").classList.add("show"); adminTab("games");
+}
+async function adminTab(tab){
+    const c=document.getElementById("adminContent");
+    if(tab==='games'){
+      c.innerHTML=`<div class="admin-grid"><div class="admin-stat">الألعاب<b>${games.length}</b></div><div class="admin-stat">حالة Firebase<b>${cloudReady?'متصل':'غير متصل'}</b></div><div class="admin-stat">الحساب الحالي<b>${auth.currentUser?auth.currentUser.email:'-'}</b></div></div><h3>➕ إضافة لعبة</h3><div class="admin-form"><input id="admName" placeholder="اسم اللعبة"><input id="admPrice" type="number" step="0.01" placeholder="السعر (سيبه فاضي = مجاني)"><label class="full" style="display:block;color:#cfe0ee">🖼️ صورة اللعبة من الجهاز<input id="admImageFile" type="file" accept="image/*" style="margin-top:8px;padding:8px;background:#09131f;color:#cfe0ee;border:1px solid #294158;border-radius:8px"></label><small class="panel-note full">اختار صورة من جهازك. هتتضغط تلقائيًا قبل الحفظ.</small><input id="admDownload" placeholder="رابط تحميل اللعبة (Google Drive / Mega / GitHub...)"><div class="panel-note">ارفع ملف اللعبة بنفسك على Google Drive أو Mega أو GitHub Releases، وخد رابط التحميل المباشر وحطه هنا.</div><input id="admTrailer" placeholder="رابط/كلمة بحث YouTube"><textarea id="admDesc" placeholder="وصف اللعبة"></textarea><label style="display:flex;align-items:center;gap:8px;cursor:pointer;color:#cfe0ee"><input id="admComingSoon" type="checkbox" style="width:18px;height:18px"> 🔜 اللعبة "قريبًا" (مش متاحة للشراء لسه، هتظهر في بانر خاص فوق المتجر)</label><button class="admin-action full" onclick="adminAddGame()">💾 حفظ اللعبة</button></div><h3>🎮 الألعاب الحالية</h3><div id="adminGameList" class="admin-list"></div>`;
+      renderAdminGames();
+    } else if(tab==='orders'){
+      c.innerHTML='<h3>🧾 آخر الطلبات</h3><div id="adminOrderList" class="admin-list">جاري التحميل...</div>';
+      try{const qs=await getDocs(query(collection(db,'orders'),orderBy('createdAt','desc'),limit(50)));document.getElementById('adminOrderList').innerHTML=qs.docs.map(d=>{const x=d.data();return `<div class="admin-row"><div><b>${x.email||x.uid}</b><br><small>${x.status||'pending'} • $${Number(x.total||0).toFixed(2)}</small></div><span>${d.id}</span></div>`}).join('')||'لا توجد طلبات';}catch(e){document.getElementById('adminOrderList').textContent='تعذر قراءة الطلبات. تأكد من Firestore Rules.';}
+    } else {
+      c.innerHTML='<h3>👥 المستخدمون</h3><div id="adminUserList" class="admin-list">جاري التحميل...</div>';
+      try{const qs=await getDocs(query(collection(db,'users'),limit(100)));document.getElementById('adminUserList').innerHTML=qs.docs.map(d=>{const x=d.data();return `<div class="admin-row"><div><b>${x.displayName||'بدون اسم'}</b><br><small>${x.email||''}</small></div><span>${x.uid||d.id}</span></div>`}).join('')||'لا يوجد مستخدمون';}catch(e){document.getElementById('adminUserList').textContent='تعذر قراءة المستخدمين. تأكد من Firestore Rules.';}
+    }
+}
+function renderAdminGames(){
+ const el=document.getElementById('adminGameList'); if(!el)return;
+ if(!games.length){ el.innerHTML='<p class="panel-note">لسه مفيش ألعاب. أضف أول لعبة من الفورم اللي فوق.</p>'; return; }
+ el.innerHTML=games.map(g=>`<div class="admin-row"><div><b>${g.name}</b> ${g.comingSoon?'<span style="color:var(--blue);font-size:12px">🔜 قريبًا</span>':''}<br><small>${g.comingSoon?'':formatPrice(g.price)}</small></div><button class="admin-action" style="background:var(--red);border-color:var(--red)" onclick="deleteGame('${String(g.name).replace(/'/g,"\\'")}')">🗑 حذف</button></div>`).join('');
+}
+async function compressImageForFirestore(file){
+  if(!file || !file.type.startsWith('image/')) throw new Error('اختار ملف صورة صحيح');
+  const dataUrl=await new Promise((resolve,reject)=>{
+    const reader=new FileReader();
+    reader.onload=()=>resolve(reader.result);
+    reader.onerror=()=>reject(new Error('تعذر قراءة الصورة'));
+    reader.readAsDataURL(file);
+  });
+  const image=await new Promise((resolve,reject)=>{
+    const img=new Image();
+    img.onload=()=>resolve(img);
+    img.onerror=()=>reject(new Error('تعذر فتح الصورة'));
+    img.src=dataUrl;
+  });
+  const maxSide=1400;
+  const scale=Math.min(1,maxSide/Math.max(image.width,image.height));
+  const canvas=document.createElement('canvas');
+  canvas.width=Math.max(1,Math.round(image.width*scale));
+  canvas.height=Math.max(1,Math.round(image.height*scale));
+  canvas.getContext('2d').drawImage(image,0,0,canvas.width,canvas.height);
+  let compressed=canvas.toDataURL('image/webp',.82);
+  if(compressed.length>900000) compressed=canvas.toDataURL('image/jpeg',.68);
+  if(compressed.length>950000) throw new Error('الصورة كبيرة جدًا بعد الضغط');
+  return compressed;
+}
+async function deleteGame(name){
+ if(!isAdmin()){showToast('هذه العملية للمدير فقط 🔒');return;}
+ if(!confirm('متأكد إنك عايز تحذف "'+name+'" نهائيًا؟')) return;
+ try{
+   await deleteDoc(doc(db,'games',name));
+   showToast('تم حذف اللعبة 🗑');
+   await loadGamesFromCloud();
+   adminTab('games');
+ }catch(e){console.error(e);showToast('تعذر حذف اللعبة');}
+}
+async function adminAddGame(){
+ const name=document.getElementById('admName').value.trim();
+ const price=Number(document.getElementById('admPrice').value||0);
+ const downloadUrl=document.getElementById('admDownload').value.trim();
+ const comingSoon=document.getElementById('admComingSoon').checked;
+ if(!name){showToast('اكتب اسم اللعبة');return;}
+ if(!auth.currentUser||!isAdmin()){showToast('هذه العملية للمدير فقط 🔒');return;}
+ try{
+    const imageFile=document.getElementById('admImageFile').files[0];
+    const existingGame=games.find(g=>g.name===name);
+    const image=imageFile ? await compressImageForFirestore(imageFile) : (existingGame?.image||"");
+    await setDoc(doc(db,'games',name),{name,price,image,downloadUrl,trailer:document.getElementById('admTrailer').value.trim(),description:document.getElementById('admDesc').value.trim(),comingSoon,updatedAt:serverTimestamp()},{merge:true});
+   showToast(comingSoon?'تم حفظ اللعبة كـ "قريبًا" 🔜':'تم حفظ اللعبة 🎮'); await loadGamesFromCloud(); adminTab('games');
+ }catch(e){console.error(e);showToast('تعذر حفظ اللعبة، تأكد من إعداد Firestore Rules');}
+}
+
+function showCommunity(){
+ const b=document.getElementById('contentPanelBody'); b.innerHTML='<h2>👥 مجتمع Tia Games</h2><p>مساحة المجتمع جاهزة للمرحلة التالية: منشورات، تعليقات، إعجابات وصفحات اللاعبين.</p><div class="content-card">يمكن ربطها مباشرة بمجموعة <b>posts</b> في Firestore.</div>';document.getElementById('contentPanel').classList.add('show');
+}
+function showNews(){
+ const b=document.getElementById('contentPanelBody'); b.innerHTML='<h2>📰 أخبار Tia Games</h2><p>قسم الأخبار أصبح صفحة مستقلة داخل المتجر.</p><div class="content-card"><b>خبر افتتاحي</b><p>تابع أخبار الألعاب والعروض الجديدة على Tia Games.</p></div>';document.getElementById('contentPanel').classList.add('show');
+}
+
+
+/* ================= ALL GAMES ================= */
+
+function showAllGames() {
+
+    document
+        .querySelectorAll(".game-card")
+        .forEach(card => {
+
+            card.style.display = "";
+
+        });
+
+}
+
+
+/* ================= LANGUAGE ================= */
+
+function changeLanguage() {
+
+    const language =
+        document
+        .getElementById("language")
+        .value;
+
+    document.documentElement.lang =
+        language;
+
+    document.documentElement.dir =
+        language === "ar"
+        ? "rtl"
+        : "ltr";
+
+    document
+        .querySelectorAll("[data-ar]")
+        .forEach(element => {
+
+            element.textContent =
+                language === "ar"
+                ? element.dataset.ar
+                : element.dataset.en;
+
+        });
+
+    const search =
+        document.getElementById("search");
+
+    if (language === "en") {
+
+        search.placeholder =
+            "Search for a game or developer...";
+
+    } else {
+
+        search.placeholder =
+            "ابحث عن لعبة أو مطور...";
+
+    }
+
+    showToast(
+        language === "en"
+        ? "English selected 🇬🇧"
+        : "تم اختيار العربية 🇪🇬"
+    );
+
+}
+
+
+/* ================= TOAST ================= */
+
+let toastTimer;
+
+function showToast(message) {
+
+    const toast =
+        document.getElementById("toast");
+
+    toast.textContent = message;
+
+    toast.classList.add("show");
+
+    clearTimeout(toastTimer);
+
+    toastTimer =
+        setTimeout(() => {
+
+            toast.classList.remove("show");
+
+        }, 2800);
+
+}
+
+
+
+/* ================= GLOBAL BUTTON HANDLERS ================= */
+/*
+  This file uses inline onclick="..." handlers.
+  Because the main script is type="module", its functions are not
+  automatically placed on window. Expose the handlers explicitly.
+*/
+Object.assign(window, {
+    goHome,
+    searchGames,
+    openGame,
+    closeGameDetails,
+    addCartClick,
+    addToCart,
+    saveCart,
+    toggleCart,
+    updateCart,
+    removeFromCart,
+    checkout,
+    showLibrary,
+    renderLibrary,
+    playGame,
+    openLogin,
+    openSignup,
+    closeModal,
+    switchToSignup,
+    switchToLogin,
+    loginUser,
+    signupUser,
+    logoutUser,
+    facebookLogin,
+    showCommunity,
+    showNews,
+    openAccountPanel,
+    openAdminPanel,
+    adminTab,
+    adminAddGame,
+    deleteGame,
+    markDemoPaid,
+    showAllGames,
+    changeLanguage,
+    showToast,
+    closeExtraPanel,
+    closeAdminPanel,
+    closeContentPanel
+});
+
+/* ================= CLOSE MODALS ================= */
+
+document
+    .querySelectorAll(".modal")
+    .forEach(modal => {
+
+        modal.addEventListener(
+            "click",
+            function(event) {
+
+                if (event.target === modal) {
+
+                    modal.classList.remove("show");
+
+                }
+
+            }
+        );
+
+    });
+
+
+/* ================= INITIALIZE ================= */
+
+updateAuthUI(auth.currentUser);
+updateCart();
+loadGamesFromCloud();
+
+</script>
+
+<script>
+// Hide startup loading screen after the page is ready.
+window.addEventListener("load", () => {
+    setTimeout(() => {
+        const loader = document.getElementById("startup-loader");
+        if (loader) loader.classList.add("hide");
+        setTimeout(() => loader?.remove(), 500);
+    }, 900);
+});
+</script>
+
+</body>
+</html>
